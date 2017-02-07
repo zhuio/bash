@@ -7,6 +7,8 @@ apt-get upgrade
 apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 
+cd /
+
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 
@@ -21,9 +23,11 @@ source .bashrc
 
 pyenv update
 
-pyenv install 3.6.0
-
-pyenv global 3.6.0
+apt-get install python
+update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+update-alternatives --install /usr/bin/python python /usr/bin/python3.5 2
+python --version
+apt install python-pip
 
 apt-get install apache2 mysql-client mysql-server
 
@@ -69,11 +73,10 @@ pip install --upgrade pip
 
 pip install Flask
 
-python __init__.py
 
 cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 <VirtualHost *:80>
-                ServerName 52.78.162.71
+                ServerName 52.78.233.53
                 ServerAdmin zhuiox@email.com
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
@@ -92,6 +95,7 @@ cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 EOF
 
 a2ensite FlaskApp
+
 service apache2 reload
 
 cd /var/www/FlaskApp
@@ -107,3 +111,5 @@ application.secret_key = 'ewfwefwefewfwef'
 EOF
 
 service apache2 restart
+
+python __init__.py

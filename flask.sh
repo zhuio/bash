@@ -1,10 +1,31 @@
-apt install python3-pip
+apt-get update
 
-sudo apt-get install apache2 mysql-client mysql-server
+apt-get upgrade
 
-sudo apt-get install libapache2-mod-wsgi
+apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 
-sudo a2enmod wsgi
+curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+
+pyenv update
+
+cat>>.bashrc<<EOF
+export PATH="~/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+EOF
+
+source .bashrc
+
+pyenv install 3.6.0
+
+pyenv global 3.6.0
+
+apt-get install apache2 mysql-client mysql-server
+
+apt-get install libapache2-mod-wsgi
+
+a2enmod wsgi
 
 cd /var/www/
 
@@ -12,7 +33,12 @@ mkdir FlaskApp
 
 cd FlaskApp
 
+mkdir FlaskApp
+
+cd FlaskApp/
+
 mkdir static
+
 mkdir templates
 
 
@@ -23,7 +49,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    return "Hi there, how ya doin?"
+    return "Hi there, how about tonight?"
 
 
 if __name__ == "__main__":
@@ -31,22 +57,19 @@ if __name__ == "__main__":
 EOF
 
 apt-get update
+
 apt-get upgrade
 
-apt-get install python3-venv
-
-pip3 install virtualenv
-
-python3 -m venv myvenv
-
-source myvenv/bin/activate
 
 pip install --upgrade pip
+
 pip install Flask
+
+python __init__.py
 
 cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 <VirtualHost *:80>
-                ServerName ec2-52-78-246-188.ap-northeast-2.compute.amazonaws.com
+                ServerName 52.78.162.71
                 ServerAdmin zhuiox@email.com
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
@@ -64,7 +87,7 @@ cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 </VirtualHost>
 EOF
 
-sudo a2ensite FlaskApp
+a2ensite FlaskApp
 service apache2 reload
 
 cd /var/www/FlaskApp
@@ -76,8 +99,7 @@ logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/FlaskApp/")
 
 from FlaskApp import app as application
-application.secret_key = 'your secret key. If you share your website, do NOT share it with this key.'
+application.secret_key = 'ewfwefwefewfwef'
 EOF
 
 service apache2 restart
-python __init__.py 

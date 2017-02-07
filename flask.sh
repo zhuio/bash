@@ -44,8 +44,8 @@ python __init__.py
 
 cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 <VirtualHost *:80>
-                ServerName yourdomain.com
-                ServerAdmin youemail@email.com
+                ServerName 0.0.0.0
+                ServerAdmin zhuiox@email.com
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
                         Order allow,deny

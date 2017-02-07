@@ -1,3 +1,5 @@
+cd /
+
 apt-get update
 
 apt-get upgrade
@@ -7,7 +9,6 @@ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev x
 
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
-pyenv update
 
 cat>>.bashrc<<EOF
 export PATH="~/.pyenv/bin:$PATH"
@@ -16,6 +17,8 @@ eval "$(pyenv virtualenv-init -)"
 EOF
 
 source .bashrc
+
+pyenv update
 
 pyenv install 3.6.0
 

@@ -1,3 +1,5 @@
+apt install python3-pip
+
 sudo apt-get install apache2 mysql-client mysql-server
 
 sudo apt-get install libapache2-mod-wsgi
@@ -31,6 +33,7 @@ EOF
 apt-get update
 apt-get upgrade
 
+apt-get install python3-venv
 
 pip3 install virtualenv
 
@@ -38,13 +41,12 @@ python3 -m venv myvenv
 
 source myvenv/bin/activate
 
+pip install --upgrade pip
 pip install Flask
-
-python __init__.py
 
 cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 <VirtualHost *:80>
-                ServerName 52.78.133.174
+                ServerName ec2-52-78-246-188.ap-northeast-2.compute.amazonaws.com
                 ServerAdmin zhuiox@email.com
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
@@ -78,3 +80,4 @@ application.secret_key = 'your secret key. If you share your website, do NOT sha
 EOF
 
 service apache2 restart
+python __init__.py 

@@ -4,10 +4,8 @@ apt-get update
 
 apt-get upgrade
 
-alias python='/usr/bin/python3.5'
-. ~/.bashrc
-sudo apt install python3-pip
-
+apt-get install python
+apt-get install pip
 
 apt-get install apache2 mysql-client mysql-server
 
@@ -49,7 +47,7 @@ apt-get update
 apt-get upgrade
 
 
-pip3 install flask
+pip install flask
 
 
 

@@ -5,8 +5,8 @@ apt-get update
 apt-get upgrade
 
 apt-get install python
-apt-get install pip
-
+apt install python-pip
+cd/
 apt-get install apache2 mysql-client mysql-server
 
 apt-get install libapache2-mod-wsgi
@@ -88,5 +88,7 @@ application.secret_key = 'ewfwefwefewfwef'
 EOF
 
 service apache2 restart
+a2ensite FlaskApp
 
+service apache2 reload
 python __init__.py

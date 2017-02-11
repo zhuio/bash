@@ -6,11 +6,9 @@ apt-get upgrade
 
 apt-get install python
 apt install python-pip
-<<<<<<< HEAD
-cd/
-=======
 
->>>>>>> f45c925d339c7364a23ec08e83617d92bb4269ae
+cd/
+
 apt-get install apache2 mysql-client mysql-server
 
 apt-get install libapache2-mod-wsgi
@@ -57,7 +55,7 @@ pip install flask
 
 cat>>/etc/apache2/sites-available/FlaskApp.conf<<EOF
 <VirtualHost *:80>
-                ServerName 0.0.0.0
+                ServerName 128.199.188.100
                 ServerAdmin zhuiox@email.com
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
